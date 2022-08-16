@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block body %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}  
+{% if messages %}  
+      {% for cato,message in messages %}
+  
+      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </symbol>
+      </svg>
+      {% if cato=='success' %}
+      {% set sym="#check-circle-fill"%}
+      {% else %}
+      {% set sym="#exclamation-triangle-fill"%}
+      {% endif %}
+    
+      <div class="alert alert-{{cato}} alert-dismissible d-flex align-items-center  justify-content-between" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="{{sym}}"/></svg>
+        {{message}}
+        <button type="button" class="btn btn-light btn-outline-{{cato}} btn-sm" data-bs-dismiss="alert" aria-label="Close">Dismiss</button>      
+      </div>
+    
+      {% endfor %}  
+{% endif %}  
+{% endwith %}
+
+  <!-- we do section -->
+
+  
+  <section class="choose_section layout_padding section_pl ">
+    <div class="container py_mobile_45">
+      <div class="heading_container heading_center">
+        <p style="color:white ;text-align: justify;font-size: 132%;"><strong>
+          As the name suggests E-Cropter targets the information related to the crop with the help of Machine Learning and provides appropriate information regarding crop production at a particular location/area.
+          E-Cropter is a web application that predicts weather with the help of dataset/API. 
+          Firstly, it takes the location from user after providing authentication to access the website. 
+          It is a multi-disciplinary application that gives information by performing mathematical logics and algorithm to determine which crop can be grown as per weather conditions on the location provide by user. 
+          So, the main motive of this project is to enhance the production of crop for the user by crop prediction.
+        </strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wedo_section layout_padding section_pr">
+    <div class="container" style="background-color: white;" background="{{url_for('static',filename='images/Farming-Wallpaper-11617.jpg')}}">
+
+    <h1>
+    <form class="container my-3" action="/AboutUs" method="POST">
+        <div class="form-group mx-4">
+          <label for="exampleFormControlTextarea1">Feedback: -</label>
+          <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="3" name="feedback" required></textarea>
+        </div>
+    
+        <button type="submit" class="btn btn-outline-dark mb-2 mx-4">Submit</button>
+    <a href="/feedback"  class="btn btn-outline-dark mx-4">Feedbacks</a>
+    
+    </form>
+    </h1>
+    
+
+    </div>
+  </section>
+
+{% endblock body %}

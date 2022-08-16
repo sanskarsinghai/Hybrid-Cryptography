@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Forecast{% endblock title %}
+
+{% block body %}
+
+  <!-- we do section -->
+
+  <section class="wedo_section layout_padding section_pr">
+    <div class="container" style="background-color: white;">
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+      <h1 class="text-center" style="padding: 2% 0% 0% 0%;">Weather Forecast of next 16 days</h1>
+      
+      <div class="justify-content-center">
+        <form action="/forecast" method='POST'>
+            <div class="input-group" style="padding: 2% 26% 2% 26%;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="">City Name</span>
+                </div>
+                <input type="text" class="form-control" name="city" required>
+              </div>
+              <button type="submit" class="btn btn-outline-dark" style="margin: 1% 0% 1% 44%;">Submit</button>
+        </form>
+        
+        
+        <!-- TODO main, description -->
+        {% for T in d %}
+        <section class="vh-10" style="background-color: #C1CFEA;">
+          <div class="container h-100">
+        
+            <div class="row d-flex justify-content-center align-items-center h-100" style="color: #282828;">
+              <div class="col-md-9 col-lg-7 col-xl-5">
+        
+                <div class="card mb-4 gradient-custom" style="border-radius: 25px;">
+                  <div class="card-body p-4">
+        
+                    <div id="demo1" class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ul class="carousel-indicators mb-0">
+                        <li data-target="#demo1" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo1" data-slide-to="1"></li>
+                        <li data-target="#demo1" data-slide-to="2"></li>
+                      </ul>
+                      <!-- Carousel inner -->
+
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <div class="d-flex justify-content-between">
+                            <div>
+                              <h2 class="display-2"><strong>{{T[0]}} °C</strong></h2>
+                              <p class="text-muted mb-0">City: - {{l['city_name']}}</p>
+                              <p class="text-muted mb-0">Pressure: - {{T[1]}}</p>
+                              <p class="text-muted mb-0">Humidity: - {{T[2]}}</p>
+                              <p class="text-muted mb-0">Wind Speed: - {{T[3]}}</p><br>
+                            
+                              <p class="text-muted mb-0" style="font-weight: bold;font-size: 86%;">Date: - {{T[4]}}</p>
+                            </div>
+                            <div>
+                              
+                              <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp"
+                                width="150px"> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        
+                    </div>
+        
+                  </div>
+                </div>
+        
+          </div>
+        </section>
+
+        {% endfor %}
+      
+
+    </div>
+  </section>
+
+
+{% endblock body %}
