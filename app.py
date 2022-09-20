@@ -12,7 +12,6 @@ import itertools
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
-import csv
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'super secret key'
