@@ -1,0 +1,188 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Encryption {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        
+        {% include 'includes/preloader.html' %}
+
+        <!-- Hero -->
+        <section class="section section-header pb-11 bg-primary text-white">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">Encryption</h1>
+                        <p class="lead">Because security is what we are looking for.</p>        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <!-- Section -->
+        <section class="section section-lg pt-6">
+            <div class="container">
+                <div class="row justify-content-center mb-5 mb-lg-6">
+                    <div class="col-12 col-lg-8">
+                        <!-- Contact Card -->
+                        <div class="card border-0 p-2 p-md-3 p-lg-5">
+                            <div class="card-header bg-white border-0 text-center">
+                                <h2>Start Encryption with us!</h2>
+                                <p>Let’s do it.</p>
+                            </div>
+                            <div class="card-body px-0 pt-0">
+                                <form method="post" action="/encryption" enctype="multipart/form-data">
+                                    <!-- Form -->
+                                    <div class="mb-4">
+                                        <label for="email">Enter the document</label>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="file" id="edoc" name="edoc" required>    
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <!-- Form -->
+                                    <div class="mb-4">
+                                        <label for="email">Enter the image</label>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="file" id="simg" name="simg" required>
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="mb-4">
+                                        <label for="message">Enter the id of Decrypted authorized users</label>
+                                        <input type="text" placeholder="Ex:- 9568032193,7850493172" class="form-control" id="message" name="denumber" rows="4" required></textarea>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn rounded btn-secondary">Encrypt and Download</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+                        <!-- End of Contact Card -->
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-12 text-center mb-5">
+                        <h2>Our support team</h2>
+                    </div> -->
+                    <!-- <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="card border-0 text-center">
+                            <div class="card-header border-0 bg-white">
+                                <img src="/static/assets/img/team/profile-picture-2.jpg" class="card-img-top rounded shadow border-0" alt="Christopher Avatar">
+                            </div>
+                            <div class="card-body">
+                                <span class="card-subtitle text-gray fw-normal">Sales</span>
+                                <h3 class="h4 card-title mt-2">Christopher Wood</h3>
+                                <ul class="list-unstyled d-flex justify-content-center mt-3">
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-sm icon-facebook me-3">
+                                            <span class="fab fa-facebook-f"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-sm icon-twitter me-3">
+                                            <span class="fab fa-twitter"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="slack social link" class="icon icon-sm icon-slack me-3">
+                                            <span class="fab fa-slack-hash"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-sm icon-dribbble me-3">
+                                            <span class="fab fa-dribbble"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
+                        <div class="card border-0 text-center">
+                            <div class="card-header border-0 bg-white">
+                                <img src="/static/assets/img/team/profile-picture-3.jpg" class="card-img-top rounded shadow border-0" alt="Bonnie Avatar">
+                            </div>
+                            <div class="card-body">
+                                <span class="card-subtitle text-gray fw-normal">Marketing</span>
+                                <h3 class="h4 card-title mt-2">Bonnie Green</h3>
+                                <ul class="list-unstyled d-flex justify-content-center mt-3">
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-sm icon-facebook me-3">
+                                            <span class="fab fa-facebook-f"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-sm icon-twitter me-3">
+                                            <span class="fab fa-twitter"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="slack social link" class="icon icon-sm icon-slack me-3">
+                                            <span class="fab fa-slack-hash"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-sm icon-dribbble me-3">
+                                            <span class="fab fa-dribbble"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card border-0 text-center">
+                            <div class="card-header border-0 bg-white">
+                                <img src="/static/assets/img/team/profile-picture-4.jpg" class="card-img-top rounded shadow border-0" alt="Neil Avatar">
+                            </div>
+                            <div class="card-body">
+                                <span class="card-subtitle text-gray fw-normal">Invoice</span>
+                                <h3 class="h4 card-title mt-2">Neil Sims</h3>
+                                <ul class="list-unstyled d-flex justify-content-center mt-3">
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-sm icon-facebook me-3">
+                                            <span class="fab fa-facebook-f"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-sm icon-twitter me-3">
+                                            <span class="fab fa-twitter"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="slack social link" class="icon icon-sm icon-slack me-3">
+                                            <span class="fab fa-slack-hash"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-sm icon-dribbble me-3">
+                                            <span class="fab fa-dribbble"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <!-- End of section -->
+
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
