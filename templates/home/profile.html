@@ -1,155 +1,68 @@
 {% extends "layouts/base.html" %}
-
-{% block title %} Contact {% endblock %} 
-
+{% block title %} Encryption {% endblock %} 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
-
 {% block content %}
-
-    <main>
-
+    <main>  
         {% include 'includes/preloader.html' %}
-
-        <!-- Section -->
-        <section class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark" data-background="/static/assets/img/pages/form-image.jpg">
+        <!-- Hero -->
+        <section class="section section-header pb-11 bg-primary text-white">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-12 d-flex align-items-center justify-content-center">
-                        <div class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
-                            <div class="text-center text-md-center mb-4 mt-md-0">
-                                <h1 class="mb-0 h3">
-                                    <a href="https://appseed.us/product/pixel-bootstrap/flask/" target="_blank"><b>Hybrid Cryptography</b></a> - Register
-                                </h1>
-                                <br />
-                                <span class="font-weight-normal">
-                                    {% if msg %}
-                                        {{ msg | safe }}
-                                    {% else %}
-                                        Add your credentials
-                                    {% endif %}                                  
-                                </span>
-                            </div>
-
-                            {% if not success %}
-
-                                <form method="post" action="/signup">
-
-                                  
-
-                                    <div class="form-group mb-4">
-                                        <label for="fname">Firstname</label>
-                                        <div class="input-group">
-                                            
-                                            <input type="text" class="form-control" id="inputEmail3" name="fname" placeholder="First name" required>
-                                        </div>  
-                                    </div>
-                                    <!-- Form -->
-                                    <div class="form-group mb-4">
-                                        <label for="lname">Lastname</label>
-                                        <div class="input-group">
-                                            
-                                            <input type="text" class="form-control" id="inputEmail3" name="lname" placeholder="Last name" required>
-                                        </div>  
-                                    </div>
-
-                                    <div class="form-group mb-4">
-                                        <label for="phone">Phone</label>
-                                        <div class="input-group">
-                                           
-                                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter your number" required>
-                                        </div>  
-                                    </div>
-                                    
-                                    <div class="form-group mb-4">
-                                        <label for="dob">Date of Birth</label>
-                                        <div class="input-group mb-4">
-                                            <span class="input-group-text" id="basic-addonDate1"><span
-                                                    class="fas far fa-calendar-alt"></span></span>
-                                            <input class="form-control" data-datepicker="" id="exampleInputDate1" name="dob" placeholder="Select date"
-                                                type="text" aria-label="Date with icon left">
-                                        </div>                                
-                                    </div>
-
-                                    <fieldset>
-                                        <legend class="h6">Gender</legend>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="male" checked>
-                                            <label class="form-check-label" for="exampleRadios1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="option2">
-                                            <label class="form-check-label" for="exampleRadios2">
-                                                Female
-                                            </label>
-                                        </div>
-                                       
-                                        <!-- End of Radio -->
-                                    </fieldset>
-
-                                    <div class="form-group mb-4">
-                                        <label for="email">Email</label>
-                                        <div class="input-group">
-                                        
-                                            
-                                            <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" required>
-                                        </div>  
-                                    </div>
-                                    <!-- End of Form -->
-                                    <div class="form-group">
-                                        <!-- Form -->
-                                        <div class="form-group mb-4">
-                                            <label>Password</label>
-                                            <div class="mb-3">
-                                              <input type="password" class="form-control" id="inputEmail3" name="password" placeholder="Password" required>
-                                          </div> 
-                                        </div>
-
-                                        <div class="form-group">
-                                            <!-- Form -->
-                                            <label>Password Check</label>
-                                            <div class="mb-3">
-                                            <input type="password" class="form-control" id="inputEmail3" name="conpassword" placeholder="Confirm password" required>
-                                             </div>
-                                            </div>    
-                                        <!-- End of Form -->
-                                        <div class="d-flex justify-content-between align-items-center mb-4">
-                                            <div class="form-check mb-0">
-                                                
-                                            </div>
-                                            <div><a href="/login" class="text-right"><b>Login</b></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button type="submit" name="register" class="btn btn-primary">Register</button>
-                                    </div>
-                                </form>
-                            
-                            {% else %} 
-
-                                <p class="mt-4 text-sm text-center">
-                                    <a href="{{ url_for('authentication_blueprint.login') }}" class="btn btn-primary">Sign IN</a>
-                                </p>
-                            
-                            {% endif %}
-
-                            <br />
-
-                           
-
-                        </div>
+                    <div class="col-12 col-xl-8 text-center">
+                        <h1 class="display-2 mb-3">Profile</h1>
+                        <!--<p class="lead">Because security is what we are looking for.</p>   -->      
                     </div>
                 </div>
             </div>
-        </section>
+        </section> 
+        <!-- Section -->
+      <!--  <section class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark" data-background="/static/assets/img/pages/form-image.jpg">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">   -->
+            <div class="container rounded bg-white mt-5 mb-5">
+               <div class="row">
+            <!--       <div class="col-md-3 border-right">
+                       <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                   </div>  -->
+                   <div class="col-md-5 border-right">
+                       <div class="p-3 py-5">
+                           <div class="d-flex justify-content-between align-items-center mb-3">
+                               <h5 class="text-right">My Profile </h5>
+                           </div>
+                           <div class="row mt-2">
+                               <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" name="fname" id="fname" value="{{lo.fname}}" placeholder="first name" ></div>
+                               <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control"  name="lname" id="lname" value="{{lo.lname}}" placeholder="last name"></div>
+                           </div>
+                           <div class="row mt-3">
+                               <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" name="phone" id="phone" value="{{lo.phone}}" placeholder=" phone number" ></div><br>
+                               <div class="col-md-12"><label class="labels">Date of Birth</label><input type="text" class="form-control" name="dob" id="dob" value="{{lo.dob}}" placeholder="date of birth" ></div><br>
+                               <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control" name="gender" id="gender" value="{{lo.gender}}" placeholder="gender"></div><br>
+                               <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" name="email" id="email" value="{{lo.email}}" placeholder="email" ></div><br>
 
+                           </div>
+                           
+                           <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                       </div>
+                   </div>
+                   <div class="col-md-4">
+                       <div class="p-3 py-5">
+                           <br><br>
+                          
+                           <!--<div class="d-flex justify-content-between align-items-center experience"><span>Change Password</span></div><br> -->
+                           <div class="col-md-12"><label for="password" class="labels">Cureent Password</label><input type="text" class="form-control" id="password" name="cpassword"  placeholder="Current Password" value=""></div> <br>
+                           <div class="col-md-12"><label for="password" class="labels">New Password</label><input type="text" class="form-control" id="password" name="npassword" placeholder="Enter New password" value=""></div><br>
+                           <div class="col-md-12"><label for="password" class="labels">Confirm Password</label><input type="text" class="form-control" id="password" name="copassword" placeholder="Re-enter New Pasword" value=""></div>
+                           <div class="mt-5 text-center"><button type="button" class="btn btn-primary">Change Password</button>
+                            
+                       </div>
+                   </div>
+               </div>
+           </div>
+           </div>
+           </div>
+               </section>
     </main>
-
     {% include 'includes/footer.html' %}
-
 {% endblock content %}
-
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}{% endblock javascripts %}

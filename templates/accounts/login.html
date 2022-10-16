@@ -13,11 +13,26 @@
 
         <!-- Section -->
         <section class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark" data-background="/static/assets/img/pages/form-image.jpg">
+            
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="signin-inner my-4 my-lg-0 bg-white shadow-soft border rounded border-gray-300 p-4 p-lg-5 w-100 fmxw-500">
                             <div class="text-center text-md-center mb-4 mt-md-0">
+                                
+        {% with messages = get_flashed_messages(with_categories=true) %}  
+        {% if messages %}  
+              {% for cato,message in messages %}
+            
+              <div class="alert alert-{{cato}} alert-dismissible d-flex align-items-center justify-content-between" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                    {{message}}
+                    <button type="button" class="btn btn-light btn-outline-{{cato}} btn-sm" data-bs-dismiss="alert" aria-label="Close" style="margin:0% 0%">Dismiss</button>
+              </div>
+            
+              {% endfor %}  
+        {% endif %}  
+        {% endwith %}  
                                 <h1 class="mb-0 h3">
                                     <a href="https://appseed.us/product/pixel-bootstrap/flask/" target="_blank"><b>Hybrid Cryptography</b></a> - Login
                                 </h1>
