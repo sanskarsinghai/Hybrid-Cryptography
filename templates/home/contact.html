@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Contact {% endblock %} 
+{% block title %} Contact Us {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -12,27 +12,32 @@
         {% include 'includes/preloader.html' %}
 
         <!-- Hero -->
-        <section class="section section-header pb-11 bg-primary text-white">
+        <section class="section section-header pb-11 bg-primary text-white">  
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-12 col-xl-8 text-center">
-                        <h1 class="display-2 mb-3">Get in touch today</h1>
-                        <p class="lead">Have a new project in mind? Drop us a line about your project needs, we answer same day.</p>        
+                        {% with messages = get_flashed_messages(with_categories=true) %}  
+                        {% if messages %}  
+                              {% for cato,message in messages %}
+                            
+                              <div class="alert alert-{{cato}} alert-dismissible d-flex align-items-center justify-content-between" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                    {{message}}
+                                    <button type="button" class="btn btn-light btn-outline-{{cato}} btn-sm" data-bs-dismiss="alert" aria-label="Close" style="margin:0% 0%">Dismiss</button>
+                              </div>
+                            
+                              {% endfor %}  
+                        {% endif %}  
+                        {% endwith %}
+                        <h1 class="display-2 mb-3">Contact Us</h1>
+                        <p class="lead">Contact us if you lost your key</p>        
                     </div>
                 </div>
             </div>
+            
         </section>
 
-        <!-- Section -->
-        <div class="section py-0">
-            <div class="container mt-n10">
-                <div class="row">
-                    <div class="col-12">
-                        <iframe class="map rounded" id="gmap_canvas" src="https://maps.google.com/maps?q=san%20francisco&t=&z=8&ie=UTF8&iwloc=&output=embed"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         
         <!-- Section -->
         <section class="section section-lg pt-6">
@@ -42,149 +47,41 @@
                         <!-- Contact Card -->
                         <div class="card border-0 p-2 p-md-3 p-lg-5">
                             <div class="card-header bg-white border-0 text-center">
-                                <h2>Want to work with us?</h2>
-                                <p>Cool! Let’s talk about your project</p>
+                                <h2>We need to check it's you who are requesting for key</h2>
+                                <p>Let’s do it.</p>
                             </div>
                             <div class="card-body px-0 pt-0">
-                                <form action="#">
+                                <form method="post" action="/contactus" enctype="multipart/form-data">
                                     <!-- Form -->
                                     <div class="mb-4">
-                                        <label for="name">Your Name</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon3"><span class="fas fa-user-circle"></span></span>
-                                            <input type="text" class="form-control" placeholder="e.g. Bonnie Green" id="name" required>
+                                        <label for="email">Enter the file id</label>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="text" id="fileid" name="fileid" placeholder="Encrypt file id" required>    
                                         </div>
                                     </div>
                                     <!-- End of Form -->
                                     <!-- Form -->
                                     <div class="mb-4">
-                                        <label for="email">Your Email</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon4"><span class="fas fa-envelope"></span></span>
-                                            <input type="email" class="form-control" placeholder="example@company.com" id="email" required>
+                                        <label for="email">Enter the regeneration token which is shared at the time of encryption</label>
+                                        <div class="mb-3">
+                                            <input class="form-control" type="password" id="retk" name="retk" placeholder="Key Regeneration Token" required>
                                         </div>
                                     </div>
-                                    <!-- End of Form -->
-                                    <div class="mb-4">
-                                        <label for="message">Your Message</label>
-                                        <textarea placeholder="Your message" class="form-control" id="message" rows="4" required></textarea>
-                                    </div>
+                                    
                                     <!-- End of Form -->
                                     <div class="d-grid">
-                                        <button type="submit" class="btn rounded btn-secondary">Send message</button>
+                                        <button type="submit" class="btn rounded btn-secondary">Send the Request</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+
+
                         <!-- End of Contact Card -->
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 text-center mb-5">
-                        <h2>Our support team</h2>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="card border-0 text-center">
-                            <div class="card-header border-0 bg-white">
-                                <img src="/static/assets/img/team/profile-picture-2.jpg" class="card-img-top rounded shadow border-0" alt="Christopher Avatar">
-                            </div>
-                            <div class="card-body">
-                                <span class="card-subtitle text-gray fw-normal">Sales</span>
-                                <h3 class="h4 card-title mt-2">Christopher Wood</h3>
-                                <ul class="list-unstyled d-flex justify-content-center mt-3">
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-sm icon-facebook me-3">
-                                            <span class="fab fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-sm icon-twitter me-3">
-                                            <span class="fab fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="slack social link" class="icon icon-sm icon-slack me-3">
-                                            <span class="fab fa-slack-hash"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-sm icon-dribbble me-3">
-                                            <span class="fab fa-dribbble"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="card border-0 text-center">
-                            <div class="card-header border-0 bg-white">
-                                <img src="/static/assets/img/team/profile-picture-3.jpg" class="card-img-top rounded shadow border-0" alt="Bonnie Avatar">
-                            </div>
-                            <div class="card-body">
-                                <span class="card-subtitle text-gray fw-normal">Marketing</span>
-                                <h3 class="h4 card-title mt-2">Bonnie Green</h3>
-                                <ul class="list-unstyled d-flex justify-content-center mt-3">
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-sm icon-facebook me-3">
-                                            <span class="fab fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-sm icon-twitter me-3">
-                                            <span class="fab fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="slack social link" class="icon icon-sm icon-slack me-3">
-                                            <span class="fab fa-slack-hash"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-sm icon-dribbble me-3">
-                                            <span class="fab fa-dribbble"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card border-0 text-center">
-                            <div class="card-header border-0 bg-white">
-                                <img src="/static/assets/img/team/profile-picture-4.jpg" class="card-img-top rounded shadow border-0" alt="Neil Avatar">
-                            </div>
-                            <div class="card-body">
-                                <span class="card-subtitle text-gray fw-normal">Invoice</span>
-                                <h3 class="h4 card-title mt-2">Neil Sims</h3>
-                                <ul class="list-unstyled d-flex justify-content-center mt-3">
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="facebook social link" class="icon icon-sm icon-facebook me-3">
-                                            <span class="fab fa-facebook-f"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="twitter social link" class="icon icon-sm icon-twitter me-3">
-                                            <span class="fab fa-twitter"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="slack social link" class="icon icon-sm icon-slack me-3">
-                                            <span class="fab fa-slack-hash"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank" aria-label="dribbble social link" class="icon icon-sm icon-dribbble me-3">
-                                            <span class="fab fa-dribbble"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </section> 
         <!-- End of section -->
 
     </main>
