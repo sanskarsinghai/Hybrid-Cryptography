@@ -1,0 +1,167 @@
+{% extends "admin/base.html" %}
+
+{% block title %} {{lo.fname}} Details {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        
+        {% include 'includes/preloader.html' %}
+
+        <!-- Hero -->
+        <section class="section section-header pb-11 bg-primary text-white">  
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        {% with messages = get_flashed_messages(with_categories=true) %}  
+                        {% if messages %}  
+                              {% for cato,message in messages %}
+                            
+                              <div class="alert alert-{{cato}} alert-dismissible d-flex align-items-center justify-content-between" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                    {{message}}
+                                    <button type="button" class="btn btn-light btn-outline-{{cato}} btn-sm" data-bs-dismiss="alert" aria-label="Close" style="margin:0% 0%">Dismiss</button>
+                              </div>
+                            
+                              {% endfor %}  
+                        {% endif %}  
+                        {% endwith %}
+                        <h1 class="display-2 mb-3">{{lo.fname}} Details</h1>
+                        <p class="lead"></p>        
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        
+        
+        <!-- Section -->
+        <section class="section pt-3">
+            <div class="container">
+
+              <div class="p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h1 class="text-right">My Profile </h1>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">First Name</label><input type="text" class="form-control" name="fname" id="fname" value="{{lo.fname}}" placeholder="first name" readonly></div>
+                        <div class="col-md-6"><label class="labels">Last Name</label><input type="text" class="form-control"  name="lname" id="lname" value="{{lo.lname}}" placeholder="last name" readonly></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Mobile Number</label><input type="text" class="form-control" name="phone" id="phone" value="{{lo.phone}}" placeholder=" phone number" readonly></div><br>
+                        <div class="col-md-6"><label class="labels">Date of Birth</label><input type="text" class="form-control" name="dob" id="dob" value="{{lo.dob}}" placeholder="date of birth" readonly></div><br>
+                        <div class="col-md-6"><label class="labels" style="margin: 3% 0%;">Gender</label><input type="text" class="form-control" name="gender" id="gender" value="{{lo.gender}}" placeholder="gender" readonly></div><br>
+                        <div class="col-md-6"><label class="labels" style="margin: 3% 0%;">Email</label><input type="text" class="form-control" name="email" id="email" value="{{lo.email}}" placeholder="email" readonly ></div><br>
+
+                    </div>
+                  </div>
+                </div>        
+                </section>
+
+                  <section class="section pt-1">
+                    <div class="container">
+                      
+                      <h1 class="display-2 mb-3">Document Details</h1>
+                    
+                    <div class="table-responsive">
+                      {% if allfeed|length==0 %}
+                      <div class="alert alert-info text-center" role="alert">
+                          No Document Availabe!!!
+                        </div>
+                      {% else %}
+                      <!-- <table class="table table-hover my-4 text-center">
+                         -->
+                      <div class="mb-5">
+                        
+                  <table class="table table-striped"> 
+                
+                          <thead> 
+                            <tr>
+                              <th scope="col"  style="width:10%">S No</th>
+                              <th scope="col">File Id</th>
+                              <th scope="col">File Name</th>
+                              <th scope="col">Owner Number</th>
+                              <th scope="col">Recepient Number</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                  {% for rows in allfeed %}
+                    <tr>
+                      <th scope="row">{{loop.index}}</th>
+                      <td>{{rows.Uniqueid}}</td>
+                      <td>{{rows.doc_name}}</td>
+                      <td>{{rows.ownerid}}</td>
+                      <td>{{rows.recepientid}}</td>
+                  </tr>
+                  {% endfor %}
+                
+                  {% endif %}
+                  </tbody>
+                </table>
+                </div>
+                </div>
+
+              </div>
+            </section>
+              
+        <section class="section pt-1">
+          <div class="container">
+                <div class="table-responsive-sm">
+                <h1 class="text-center my-4">Request Table</h1>
+                     {% if c|length==0 %}
+                     <div class="alert alert-info text-center" role="alert">
+                         No Request is Under Process!!!
+                       </div>
+                     {% else %}
+                     <!-- <table class="table table-hover my-4 text-center">
+                        -->
+               <div class="mb-5">
+                       
+                 <table class="table table-striped"> 
+               
+                         <thead> 
+                           <tr>
+                           <th scope="col"  style="width:10%">S No</th>
+                           <th scope="col">File Id</th>
+                           <th scope="col">Request Id</th>
+                           <th scope="col">Key Regeneration Token</th>
+                           <th scope="col">Response</th>
+                           </tr>
+                           
+                         </thead>
+                         <tbody>
+                 {% for rows in c %}
+                   <tr>
+                     <th scope="row">{{loop.index}}</th>
+                     <td>{{rows.file_id}}</td>
+                     <td>{{rows.request_id}}</td>
+                     <td>{{rows.Key_Regeneration_Token}}</td>
+                     <td>
+                       <a href="/admin/responserequest/{{rows.file_id}} " type="button" class="btn btn-outline-dark btn-sm">Response</a>
+                     </td>
+                     
+                 </tr>
+                 {% endfor %}
+               
+                 {% endif %}
+                 </tbody>
+               </table>
+               </div>
+               </div>    
+              
+            </div>
+        </section> 
+        <!-- End of section -->
+
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

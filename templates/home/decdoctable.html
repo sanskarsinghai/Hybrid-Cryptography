@@ -1,0 +1,98 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Decryption Document Details {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <main>
+        
+        {% include 'includes/preloader.html' %}
+
+        <!-- Hero -->
+        <section class="section section-header pb-11 bg-primary text-white">  
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xl-8 text-center">
+                        {% with messages = get_flashed_messages(with_categories=true) %}  
+                        {% if messages %}  
+                              {% for cato,message in messages %}
+                            
+                              <div class="alert alert-{{cato}} alert-dismissible d-flex align-items-center justify-content-between" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                                    {{message}}
+                                    <button type="button" class="btn btn-light btn-outline-{{cato}} btn-sm" data-bs-dismiss="alert" aria-label="Close" style="margin:0% 0%">Dismiss</button>
+                              </div>
+                            
+                              {% endfor %}  
+                        {% endif %}  
+                        {% endwith %}
+                        <h1 class="display-2 mb-3">Document Authorized For Decryption</h1>
+                        <p class="lead"></p>        
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        
+        
+        <!-- Section -->
+        <section class="section section-lg pt-6">
+            <div class="container">
+
+                            <div class="table-responsive">
+                                     {% if allfeed|length==0 %}
+                                     <div class="alert alert-info text-center" role="alert">
+                                         No Document Availabe for Decryption!!!
+                                       </div>
+                                     {% else %}
+                                     <!-- <table class="table table-hover my-4 text-center">
+                                        -->
+                               <div class="mb-5">
+                                       
+                                 <table class="table table-striped"> 
+                               
+                                         <thead> 
+                                           <tr>
+                                             <th scope="col"  style="width:10%">S No</th>
+                                             <th scope="col">File Id</th>
+                                             <th scope="col">File Name</th>
+                                             <th scope="col">Owner Number</th>
+                                           </tr>
+                                         </thead>
+                                         <tbody>
+                                 {% for rows in allfeed %}
+                                   <tr>
+                                     <th scope="row">{{loop.index}}</th>
+                                     <td>{{rows.Uniqueid}}</td>
+                                     <td>{{rows.doc_name}}</td>
+                                     <td>{{rows.ownerid}}</td>
+                                 </tr>
+                                 {% endfor %}
+                               
+                                 {% endif %}
+                                 </tbody>
+                               </table>
+                               </div>
+                               </div>
+                               <div class="container">
+                                <a class="btn btn-outline-dark mb-3" href="{{prev}}" style="margin: 0% 62% 0% 11%;">&larr; Previous</a>
+                                <a class="btn btn-outline-dark mb-3" href="{{next}}">Next &rarr;</a>
+                                </div>
+                              </div>
+                              
+            </div>
+        </section> 
+        <!-- End of section -->
+
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
