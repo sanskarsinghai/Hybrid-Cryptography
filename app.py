@@ -119,7 +119,6 @@ def users():
     else:
         return redirect("/admin/")
 
-
 @app.route("/admin/userprofile/<string:email>")
 def pro(email):
     if 'un' in session:
@@ -145,7 +144,7 @@ def status(email):
 @app.route("/admin/keymanagement")
 def keys():
     if 'un' in session:
-        allfeed=documentT.query.filter_by().all()
+        allfeed=documentT.query.filter_by().order_by(documentT.Uniqueid.desc()).all()
         return render_template("admin/keymanagement.html",allfeed=allfeed)
     else:
         return redirect("/admin/")
@@ -153,7 +152,7 @@ def keys():
 @app.route("/admin/requests")
 def usersRequests():
     if 'un' in session:
-        allfeed=contact.query.filter_by(response_status="Under Process").all()
+        allfeed=contact.query.filter_by(response_status="Under Process").order_by(contact.request_id.desc()).all()
         return render_template("admin/RequestKey.html",allfeed=allfeed)
     else:
         return redirect("/admin/login")
@@ -442,8 +441,8 @@ def encryption():
 
             print("Encryption process completed")
 
-            ftk=open(ba+"\\CryptoCode\\encFile\\confidential.txt","w")
-            ftk.write("This is the validation token password of regenerating the key if key is lost for doc "+s+".txt\n Please don't share this file or token password.\nYour password token is: -\n"+k[1])
+            ftk=open(ba+"\\CryptoCode\\encFile\\"+s+".txt","w")
+            ftk.write("This is the validation token password of regenerating the key if key is lost for doc "+s+".bin\n Please don't share this file or token password.\nYour password token is: -\n"+k[1])
             ftk.close()
 
             ks=""
@@ -481,7 +480,7 @@ def encryption():
             os.remove("CryptoCode\\UploadF\\"+imna)
             os.remove("CryptoCode\\encFile\\"+s+".bin")
             os.remove("CryptoCode\\encFile\\"+s+".png")
-            os.remove("CryptoCode\\encFile\\confidential.txt")
+            os.remove("CryptoCode\\encFile\\"+s+".txt")
 
             return send_file(stream,as_attachment=True,attachment_filename='EncryptionDocs.zip')
 
@@ -618,7 +617,7 @@ def about():
 @app.route("/logdetails")
 def logdetails():
     if 'email' in session:
-        c = LogT.query.filter(LogT.file_id.startswith(str(session['phone'])) | LogT.user_no.startswith(str(session['phone']))).all()
+        c = LogT.query.filter(LogT.file_id.startswith(str(session['phone'])) | LogT.user_no.startswith(str(session['phone']))).order_by(LogT.ObjectId.desc()).all()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -633,12 +632,12 @@ def logdetails():
         elif page==1:
             prev = "#"
             next = "/logdetails?page="+ str(page+1)
-            flash("Your are on oldest logs","info")
+            flash("Your are on latest logs","info")
             
         elif page==last:
             prev = "/logdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on latest logs","info")
+            flash("Your are on oldest logs","info")
         else:
             prev = "/logdetails?page="+ str(page-1)
             next = "/logdetails?page="+ str(page+1)
@@ -650,7 +649,7 @@ def logdetails():
 @app.route("/docdetails")
 def docdetails():
     if 'email' in session:
-        c = documentT.query.filter(documentT.Uniqueid.startswith(str(session['phone']))).all()
+        c = documentT.query.filter(documentT.Uniqueid.startswith(str(session['phone']))).order_by(documentT.Uniqueid.desc()).all()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -665,12 +664,12 @@ def docdetails():
         elif page==1:
             prev = "#"
             next = "/docdetails?page="+ str(page+1)
-            flash("Your are on oldest docs","info")
+            flash("Your are on latest docs","info")
             
         elif page==last:
             prev = "/docdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on latest docs","info")
+            flash("Your are on oldest docs","info")
         else:
             prev = "/docdetails?page="+ str(page-1)
             next = "/docdetails?page="+ str(page+1)
@@ -682,7 +681,7 @@ def docdetails():
 @app.route("/decdocdetails")
 def decdocdetails():
     if 'email' in session:
-        c = documentT.query.filter(documentT.recepientid.startswith('%'+str(session['phone'])+'%') ).all()
+        c = documentT.query.filter(documentT.recepientid.startswith('%'+str(session['phone'])+'%') ).order_by(documentT.Uniqueid.desc()).all()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -697,12 +696,12 @@ def decdocdetails():
         elif page==1:
             prev = "#"
             next = "/docdetails?page="+ str(page+1)
-            flash("Your are on oldest docs","info")
+            flash("Your are on latest docs","info")
             
         elif page==last:
             prev = "/docdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on latest docs","info")
+            flash("Your are on oldest docs","info")
         else:
             prev = "/docdetails?page="+ str(page-1)
             next = "/docdetails?page="+ str(page+1)
@@ -737,8 +736,8 @@ def contactus():
 @app.route("/requestsresponse")
 def RequestsResponse():
     if 'un' in session:
-        allfeed=contact.query.filter(contact.request_id.startswith(session['phone']),(contact.response_status.startswith("Approved"))).all()
-        noa=contact.query.filter(contact.response_status.startswith("You") | contact.response_status.startswith("Invalid")).all()
+        allfeed=contact.query.filter(contact.request_id.startswith(session['phone']),(contact.response_status.startswith("Approved"))).order_by(contact.request_id.desc()).all()
+        noa=contact.query.filter(contact.response_status.startswith("You") | contact.response_status.startswith("Invalid")).order_by(contact.request_id.desc()).all()
         return render_template("home/RequestResponse.html",allfeed=allfeed,noa=noa)
     else:
         return redirect("/login")
@@ -814,6 +813,17 @@ def deleteresponse(file_id):
     # if em !="" and pa !="":   
     if 'un' in session:
         c=contact.query.filter_by(file_id=file_id).first()
+
+        f=documentT.query.filter_by(Uniqueid=file_id).first()
+        
+        d=datetime.today()
+        s=d.strftime("%d-%m-%Y %I-%M-%S %p")
+
+        lui=s+"_"+c.file_id
+        loD=LogT(ObjectId=lui,file_id=c.file_id,file_name="None",operation=c.response_status,date_time=s,owner_no="None",user_no=session['phone'])
+        db.session.add(loD)
+        db.session.commit()
+
         db.session.delete(c)
         db.session.commit()
         return redirect("/requestsresponse")
