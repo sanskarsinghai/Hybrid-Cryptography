@@ -4,7 +4,7 @@ import os
 def stegnoimg(use,imn):   
     print("Stegnographic process is in progress..............")
     
-    ilo="templates\\CryptoCode\\UploadFdec\\"+imn+".png"
+    ilo="templates\\UploadFdec\\"+imn+".png"
 
     clear_message = lsb.reveal(ilo)
     s=clear_message.split(' ')
@@ -38,12 +38,12 @@ def DiviIn3(l,n):
     file_number = 0
     print(n)
     
-    lo='templates\\CryptoCode\\uploadFDec\\'+n+'.bin'
+    lo='templates\\uploadFDec\\'+n+'.bin'
 
     with open(lo,'rb') as f:
         while file_number<3:
             s=l[file_number]
             chunk = f.read(s)
-            with open(('templates\CryptoCode\F2\BinfileName1' + str(file_number+1)+ '.bin'),'wb') as chunk_file:
+            with open(('templates\F2\BinfileName1' + str(file_number+1)+ '.bin'),'wb') as chunk_file:
                 chunk_file.write(chunk)
             file_number += 1

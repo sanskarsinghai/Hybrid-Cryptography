@@ -14,7 +14,7 @@ o=""
 def stegnoimg(use,ilo):
     global t,iv,di,lu,o
 
-    ilo="templates\\CryptoCode\\UploadFdec\\"+ilo+".png"
+    ilo="templates\\UploadFdec\\"+ilo+".png"
 
     print("Stegnographic process is in progress..............")
     
@@ -72,7 +72,7 @@ def aesdec():
 
     daes = pyaes.AESModeOfOperationCTR(key, pyaes.Counter(iv))
 
-    f=open('templates\CryptoCode\F2\BinfileName11.bin','rb')
+    f=open('templates\F2\BinfileName11.bin','rb')
     ciphertext=b''
     
     for i in f:
@@ -92,7 +92,7 @@ def aesdec():
 
     try:
         decrypted = daes.decrypt(ciphertext)
-        f3=open('templates\CryptoCode\F2\BinfileName11.bin','w')
+        f3=open('templates\F2\BinfileName11.bin','w')
         f3.write(decrypted.decode('utf-8'))
         f3.close()
     except UnicodeDecodeError as e:
@@ -104,7 +104,7 @@ def aesdec():
 
 def desdec():
     global key,di
-    f=open('templates\CryptoCode\F2\BinfileName12.bin','rb')
+    f=open('templates\F2\BinfileName12.bin','rb')
     e=b''
     
     for i in f:
@@ -124,7 +124,7 @@ def desdec():
     try:
        key0 = DesKey(key)
        d=key0.decrypt(e) 
-       f2=open('templates\CryptoCode\F2\BinfileName12.bin','w')
+       f2=open('templates\F2\BinfileName12.bin','w')
        f2.write(d.decode('utf-8')[:len(d)-di])
        f2.close()
     except UnicodeDecodeError as e:
@@ -138,7 +138,7 @@ def rc4dec():
     global key
     
     
-    f=open('templates\CryptoCode\F2\BinfileName13.bin','rb')
+    f=open('templates\F2\BinfileName13.bin','rb')
     cipher=b''
     
     for i in f:
@@ -158,7 +158,7 @@ def rc4dec():
     try:
         arc4 = ARC4(key)
         d=arc4.decrypt(cipher)
-        f2=open('templates\CryptoCode\F2\BinfileName13.bin','w')
+        f2=open('templates\F2\BinfileName13.bin','w')
         f2.write(d.decode('utf-8'))
         f2.close()
     except UnicodeDecodeError as e:

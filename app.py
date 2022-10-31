@@ -400,7 +400,7 @@ def encryption():
 
             ba=os.getcwd()
 
-            loc=ba+"\\templates\\CryptoCode\\UploadF\\"
+            loc=ba+"\\templates\\UploadF\\"
             
             file.save(os.path.join(loc, ed))
             file2.save(os.path.join(loc,ei))
@@ -441,7 +441,7 @@ def encryption():
 
             print("Encryption process completed")
 
-            ftk=open(ba+"\\templates\\CryptoCode\\encFile\\"+s+".txt","w")
+            ftk=open(ba+"\\templates\\encFile\\"+s+".txt","w")
             ftk.write("This is the validation token password of regenerating the key if key is lost for doc "+s+".bin\n Please don't share this file or token password.\nYour password token is: -\n"+k[1])
             ftk.close()
 
@@ -468,7 +468,7 @@ def encryption():
             db.session.add(loD)
             db.session.commit()
 
-            loc=ba+"\\templates\\CryptoCode\\encFile\\"
+            loc=ba+"\\templates\\encFile\\"
            
             stream = BytesIO()
             with ZipFile(stream, 'w') as zf:
@@ -476,11 +476,11 @@ def encryption():
                   zf.write(file, os.path.basename(file))
             stream.seek(0)
 
-            os.remove("templates\\CryptoCode\\UploadF\\"+dnam)
-            os.remove("templates\\CryptoCode\\UploadF\\"+imna)
-            os.remove("templates\\CryptoCode\\encFile\\"+s+".bin")
-            os.remove("templates\\CryptoCode\\encFile\\"+s+".png")
-            os.remove("templates\\CryptoCode\\encFile\\"+s+".txt")
+            os.remove("templates\\UploadF\\"+dnam)
+            os.remove("templates\\UploadF\\"+imna)
+            os.remove("templates\\encFile\\"+s+".bin")
+            os.remove("templates\\encFile\\"+s+".png")
+            os.remove("templates\\encFile\\"+s+".txt")
 
             return send_file(stream,as_attachment=True,attachment_filename=s+' EncryptionDocs.zip')
 
@@ -520,7 +520,7 @@ def decryption():
 
             ba=os.getcwd()
 
-            loc=ba+"\\templates\\CryptoCode\\UploadFDec\\"
+            loc=ba+"\\templates\\UploadFDec\\"
         
             file.save(os.path.join(loc, ed))
             file2.save(os.path.join(loc,ei))
@@ -588,7 +588,7 @@ def decryption():
             db.session.add(loD)
             db.session.commit()
 
-            loc=ba+"\\templates\\CryptoCode\\decFile\\"
+            loc=ba+"\\templates\\decFile\\"
            
             stream = BytesIO()
             with ZipFile(stream, 'w') as zf:
@@ -596,9 +596,9 @@ def decryption():
                   zf.write(file, os.path.basename(file))
             stream.seek(0)
 
-            os.remove("templates\\CryptoCode\\uploadFDec\\"+fns+".bin")
-            os.remove("templates\\CryptoCode\\uploadFDec\\"+fnsm+".png")
-            os.remove("templates\\CryptoCode\\decFile\\"+fns+".txt")
+            os.remove("templates\\uploadFDec\\"+fns+".bin")
+            os.remove("templates\\uploadFDec\\"+fnsm+".png")
+            os.remove("templates\\decFile\\"+fns+".txt")
 
             return send_file(stream,as_attachment=True,attachment_filename=fns+' DecrytpionDocs.zip')
 
@@ -617,7 +617,7 @@ def about():
 @app.route("/logdetails")
 def logdetails():
     if 'email' in session:
-        c = LogT.query.filter(LogT.file_id.startswith(str(session['phone'])) | LogT.user_no.startswith(str(session['phone']))).order_by(LogT.ObjectId.desc()).all()
+        c = LogT.query.filter(LogT.file_id.startswith(str(session['phone'])) | LogT.user_no.startswith(str(session['phone']))).order_by(LogT.date_time.desc()).all()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -775,12 +775,12 @@ def regeneratekey(file_id):
         c=s.decode('utf-8')
         
         ba=os.getcwd()
-        lo=ba+"\\templates\\CryptoCode\\KeyReg\\img.jpg"
+        lo=ba+"\\templates\\KeyReg\\img.jpg"
 
         secret = lsb.hide(lo,c)
         im=f.Uniqueid[11:]
     
-        loc=ba+"\\templates\\CryptoCode\\KeyRegC\\"+im+".png"
+        loc=ba+"\\templates\\KeyRegC\\"+im+".png"
         secret.save(loc)
 
         d=datetime.today()
@@ -795,7 +795,7 @@ def regeneratekey(file_id):
         db.session.delete(c)
         db.session.commit()
            
-        loc=ba+"\\templates\\CryptoCode\\KeyRegC\\"
+        loc=ba+"\\templates\\KeyRegC\\"
         stream = BytesIO()
         with ZipFile(stream, 'w') as zf:
             for file in glob(os.path.join(loc, '*.*')):
