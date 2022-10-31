@@ -469,11 +469,12 @@ def encryption():
             db.session.commit()
 
             loc=ba+"\\templates\\encFile\\"
-           
             stream = BytesIO()
+        
             with ZipFile(stream, 'w') as zf:
-                for file in glob(os.path.join(loc, '*.*')):
+                for file in glob(os.path.join(loc, s+".*")):
                   zf.write(file, os.path.basename(file))
+                  
             stream.seek(0)
 
             os.remove("templates\\UploadF\\"+dnam)
@@ -575,14 +576,15 @@ def decryption():
                 flash("Invalid key for decryption","warning")
                 return redirect(request.url)
 
-            m.MergeIn3(fns)
+            d=datetime.today()
+            s=d.strftime("%d-%m-%Y %I-%M-%S %p")
+
+            m.MergeIn3(s)
 
             print("Decryption process completed")
             print(ow+"_"+file.filename[:len(file.filename)-4])
             do=documentT.query.filter_by(Uniqueid=ow+"_"+file.filename[:len(file.filename)-4]).first()    
-            d=datetime.today()
-            s=d.strftime("%d-%m-%Y %I-%M-%S %p")
-
+        
             lui=s+"_"+do.Uniqueid
             loD=LogT(ObjectId=lui,file_id=do.Uniqueid,file_name=file.filename,operation="Decryption",date_time=s,owner_no=do.ownerid,user_no=session['phone'])
             db.session.add(loD)
@@ -592,15 +594,15 @@ def decryption():
            
             stream = BytesIO()
             with ZipFile(stream, 'w') as zf:
-                for file in glob(os.path.join(loc, '*.*')):
+                for file in glob(os.path.join(loc, s+'.txt')):
                   zf.write(file, os.path.basename(file))
             stream.seek(0)
 
             os.remove("templates\\uploadFDec\\"+fns+".bin")
             os.remove("templates\\uploadFDec\\"+fnsm+".png")
-            os.remove("templates\\decFile\\"+fns+".txt")
+            os.remove("templates\\decFile\\"+s+".txt")
 
-            return send_file(stream,as_attachment=True,attachment_filename=fns+' DecrytpionDocs.zip')
+            return send_file(stream,as_attachment=True,attachment_filename=s+' DecrytpionDocs.zip')
 
         return render_template("home/decryption.html")
     else:
@@ -798,7 +800,7 @@ def regeneratekey(file_id):
         loc=ba+"\\templates\\KeyRegC\\"
         stream = BytesIO()
         with ZipFile(stream, 'w') as zf:
-            for file in glob(os.path.join(loc, '*.*')):
+            for file in glob(os.path.join(loc, im+'.png')):
               zf.write(file, os.path.basename(file))
         stream.seek(0)
 
