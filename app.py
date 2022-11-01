@@ -777,12 +777,12 @@ def regeneratekey(file_id):
         c=s.decode('utf-8')
         
         ba=os.getcwd()
-        lo=ba+"\\templates\\KeyReg\\img.jpg"
+        lo=ba+"/templates/KeyReg/img.jpg"
 
         secret = lsb.hide(lo,c)
         im=f.Uniqueid[11:]
     
-        loc=ba+"\\templates\\KeyRegC\\"+im+".png"
+        loc=ba+"/templates/KeyRegC/"+im+".png"
         secret.save(loc)
 
         d=datetime.today()
@@ -797,7 +797,7 @@ def regeneratekey(file_id):
         db.session.delete(c)
         db.session.commit()
            
-        loc=ba+"\\templates\\KeyRegC\\"
+        loc=ba+"/templates/KeyRegC/"
         stream = BytesIO()
         with ZipFile(stream, 'w') as zf:
             for file in glob(os.path.join(loc, im+'.png')):
