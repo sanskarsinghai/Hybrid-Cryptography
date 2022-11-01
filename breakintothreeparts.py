@@ -14,7 +14,7 @@ def BreakIn3Parts():
         else:
             l[1]=1
             l[2]=1
-            
+    
     file_number = 0
     with open('templates/F2/BinfileName1.bin') as f:
         while file_number<3:
