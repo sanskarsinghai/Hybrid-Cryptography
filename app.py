@@ -400,7 +400,7 @@ def encryption():
 
             ba=os.getcwd()
 
-            loc=ba+"\\templates\\UploadF\\"
+            loc=ba+"/templates/UploadF/"
             
             file.save(os.path.join(loc, ed))
             file2.save(os.path.join(loc,ei))
@@ -441,7 +441,7 @@ def encryption():
 
             print("Encryption process completed")
 
-            ftk=open(ba+"\\templates\\encFile\\"+s+".txt","w")
+            ftk=open(ba+"/templates/encFile/"+s+".txt","w")
             ftk.write("This is the validation token password of regenerating the key if key is lost for doc "+s+".bin\n Please don't share this file or token password.\nYour password token is: -\n"+k[1])
             ftk.close()
 
@@ -468,7 +468,7 @@ def encryption():
             db.session.add(loD)
             db.session.commit()
 
-            loc=ba+"\\templates\\encFile\\"
+            loc=ba+"/templates/encFile/"
             stream = BytesIO()
         
             with ZipFile(stream, 'w') as zf:
@@ -477,11 +477,11 @@ def encryption():
                   
             stream.seek(0)
 
-            os.remove("templates\\UploadF\\"+dnam)
-            os.remove("templates\\UploadF\\"+imna)
-            os.remove("templates\\encFile\\"+s+".bin")
-            os.remove("templates\\encFile\\"+s+".png")
-            os.remove("templates\\encFile\\"+s+".txt")
+            os.remove("templates/UploadF/"+dnam)
+            os.remove("templates/UploadF/"+imna)
+            os.remove("templates/encFile/"+s+".bin")
+            os.remove("templates/encFile/"+s+".png")
+            os.remove("templates/encFile/"+s+".txt")
 
             return send_file(stream,as_attachment=True,attachment_filename=s+' EncryptionDocs.zip')
 
@@ -521,7 +521,7 @@ def decryption():
 
             ba=os.getcwd()
 
-            loc=ba+"\\templates\\UploadFDec\\"
+            loc=ba+"/templates/UploadFDec/"
         
             file.save(os.path.join(loc, ed))
             file2.save(os.path.join(loc,ei))
@@ -590,7 +590,7 @@ def decryption():
             db.session.add(loD)
             db.session.commit()
 
-            loc=ba+"\\templates\\decFile\\"
+            loc=ba+"/templates/decFile/"
            
             stream = BytesIO()
             with ZipFile(stream, 'w') as zf:
@@ -598,9 +598,9 @@ def decryption():
                   zf.write(file, os.path.basename(file))
             stream.seek(0)
 
-            os.remove("templates\\uploadFDec\\"+fns+".bin")
-            os.remove("templates\\uploadFDec\\"+fnsm+".png")
-            os.remove("templates\\decFile\\"+s+".txt")
+            os.remove("templates/uploadFDec/"+fns+".bin")
+            os.remove("templates/uploadFDec/"+fnsm+".png")
+            os.remove("templates/decFile/"+s+".txt")
 
             return send_file(stream,as_attachment=True,attachment_filename=s+' DecrytpionDocs.zip')
 
