@@ -2,7 +2,7 @@
 import os
 def TxtToBin(n):    
     ba=os.getcwd()
-    lo=ba+'templates/UploadF/'+n
+    lo=ba+'/templates/UploadF/'+n
     with open(lo,'r') as txtfile:
         mytextstring = txtfile.read()
 
@@ -10,5 +10,5 @@ def TxtToBin(n):
 
     binarray = ' '.join(format(ch, 'b') for ch in bytearray(mytextstring))
 
-    with open('templates\F2\BinfileName1.bin', 'w') as binfile:
+    with open(ba+'/templates\F2\BinfileName1.bin', 'w') as binfile:
         binfile.write(binarray)

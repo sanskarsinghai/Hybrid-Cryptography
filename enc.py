@@ -68,7 +68,7 @@ def aesenc():
     ba=os.getcwd()
     iv = secrets.randbits(64)
     
-    f=open(ba+"templates/F2/BinfileName11.bin")
+    f=open(ba+"/templates/F2/BinfileName11.bin")
     plaintext=''
     for i in f:
         plaintext+=i
@@ -86,7 +86,7 @@ def aesenc():
     aes = pyaes.AESModeOfOperationCTR(key, pyaes.Counter(iv))
     ciphertext = aes.encrypt(plaintext)
 
-    f2=open(ba+'templates/F2/BinfileName11.bin','wb')
+    f2=open(ba+'/templates/F2/BinfileName11.bin','wb')
     f2.write(ciphertext)
 
     print("Encryption by aes done")
@@ -96,7 +96,7 @@ def aesenc():
 def desenc():
     global key
     ba=os.getcwd()    
-    f=open(ba+"templates/F2/BinfileName12.bin")
+    f=open(ba+"/templates/F2/BinfileName12.bin")
 
     s=''
     for i in f:
@@ -115,7 +115,7 @@ def desenc():
     key0 = DesKey(key)
     e=key0.encrypt(s.encode('utf-8'),padding=True)
 
-    f2=open(ba+'templates/F2/BinfileName12.bin','wb')
+    f2=open(ba+'/templates/F2/BinfileName12.bin','wb')
     f2.write(e)
     
     di=len(e)-len(s)
@@ -127,7 +127,7 @@ def desenc():
 def rc4enc():
     global key
     ba=os.getcwd()    
-    f=open(ba+"templates/F2/BinfileName13.bin")
+    f=open(ba+"/templates/F2/BinfileName13.bin")
 
     s=''
     for i in f:
@@ -146,7 +146,7 @@ def rc4enc():
     arc4 = ARC4(key)
     cipher = arc4.encrypt(s.encode('utf-8'))
 
-    f2=open(ba+'templates/F2/BinfileName13.bin','wb')
+    f2=open(ba+'/templates/F2/BinfileName13.bin','wb')
     f2.write(cipher)
     
     print("Encryption by rc4 done")
@@ -173,11 +173,11 @@ def stegnoimg(k,iv,di,r,l,imn,nimn):
         c+=format(i,'b')+' '
     rk=c
 
-    lo=ba+"templates/UploadF/"+imn
+    lo=ba+"/templates/UploadF/"+imn
 
     secret = lsb.hide(lo,c)
     
-    loc=ba+"templates/encFile/"+nimn+".png"
+    loc=ba+"/templates/encFile/"+nimn+".png"
     secret.save(loc)
    
     print("Stegnographic process is completed")

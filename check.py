@@ -1,8 +1,8 @@
 import os
 
 ba=os.getcwd()
-f1=open(ba+'templates/UploadF/data.txt')
-f2=open(ba+'templates/UploadF/origin.txt')
+f1=open(ba+'/templates/UploadF/data.txt')
+f2=open(ba+'/templates/UploadF/origin.txt')
 
 s=''
 for i in f1:

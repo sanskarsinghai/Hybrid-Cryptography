@@ -2,7 +2,7 @@ import os
 
 def BreakIn3Parts():
     ba=os.getcwd()
-    file_stat = os.stat(ba+'templates/F2/BinfileName1.bin')
+    file_stat = os.stat(ba+'/templates/F2/BinfileName1.bin')
     a = file_stat.st_size+1
 
     CHUNK_SIZE = a//3
@@ -16,12 +16,12 @@ def BreakIn3Parts():
             l[2]=1
     
     file_number = 0
-    with open(ba+'templates/F2/BinfileName1.bin') as f:
+    with open(ba+'/templates/F2/BinfileName1.bin') as f:
         while file_number<3:
             s=CHUNK_SIZE+l[file_number]
             chunk = f.read(s)
-            with open((ba+'templates/F2/BinfileName1' + str(file_number+1)+ '.bin'),'w') as chunk_file:
+            with open((ba+'/templates/F2/BinfileName1' + str(file_number+1)+ '.bin'),'w') as chunk_file:
                 chunk_file.write(str(chunk))
             file_number += 1
             
-    os.remove(ba+"templates/F2/BinfileName1.bin")
+    os.remove(ba+"/templates/F2/BinfileName1.bin")

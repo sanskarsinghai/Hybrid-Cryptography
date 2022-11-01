@@ -2,9 +2,9 @@ import os
 
 def MergeIn3(n):
     ba=os.getcwd()
-    f3=open(ba+'templates/F2/BinfileName11.bin','r')
-    f5=open(ba+'templates/F2/BinfileName12.bin','r')
-    f6=open(ba+'templates/F2/BinfileName13.bin','r')
+    f3=open(ba+'/templates/F2/BinfileName11.bin','r')
+    f5=open(ba+'/templates/F2/BinfileName12.bin','r')
+    f6=open(ba+'/templates/F2/BinfileName13.bin','r')
 
     s=''
     for i in f3:
@@ -18,7 +18,7 @@ def MergeIn3(n):
 
     s=s.split()
     
-    lo=ba+'templates/decFile/'+n+'.txt'
+    lo=ba+'/templates/decFile/'+n+'.txt'
     f4=open(lo,'w')
     for i in s:
         a=int(i,2)
@@ -29,6 +29,6 @@ def MergeIn3(n):
     f5.close()
     f6.close()
 
-    os.remove(ba+"templates/F2/BinfileName11.bin")
-    os.remove(ba+"templates/F2/BinfileName12.bin")
-    os.remove(ba+"templates/F2/BinfileName13.bin")
+    os.remove(ba+"/templates/F2/BinfileName11.bin")
+    os.remove(ba+"/templates/F2/BinfileName12.bin")
+    os.remove(ba+"/templates/F2/BinfileName13.bin")
