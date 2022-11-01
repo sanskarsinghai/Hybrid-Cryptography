@@ -6,14 +6,15 @@ import os
 print("\nDecryption process started: -")
 print()
 
+ba=os.getcwd()
 l=de.stegnoimg()
 de.DiviIn3(l)
 
-os.remove("templates/F2/mergeenc.bin")
+os.remove(ba+"templates/F2/mergeenc.bin")
 
 desc.stegnoimg()
 
-os.remove("templates/s1.png")
+os.remove(ba+"templates/s1.png")
 
 desc.keygen()
 desc.aesdec()

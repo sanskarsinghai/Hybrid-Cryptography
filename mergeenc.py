@@ -1,9 +1,10 @@
 import os
 
-def MergeIn1(n):
-    f3=open('templates/F2/BinfileName11.bin','rb')
-    f5=open('templates/F2/BinfileName12.bin','rb')
-    f6=open('templates/F2/BinfileName13.bin','rb')
+def MergeIn1(n):    
+    ba=os.getcwd()
+    f3=open(ba+'templates/F2/BinfileName11.bin','rb')
+    f5=open(ba+'templates/F2/BinfileName12.bin','rb')
+    f6=open(ba+'templates/F2/BinfileName13.bin','rb')
 
     s=b''
     for i in f3:
@@ -15,7 +16,7 @@ def MergeIn1(n):
     for i in f6:
         s+=i
 
-    lo='templates/encFile/'+n+'.bin'
+    lo=ba+'templates/encFile/'+n+'.bin'
 
     f4=open(lo,'wb')
     f4.write(s)
@@ -25,6 +26,6 @@ def MergeIn1(n):
     f5.close()
     f6.close()
 
-    os.remove("templates/F2/BinfileName11.bin")
-    os.remove("templates/F2/BinfileName12.bin")
-    os.remove("templates/F2/BinfileName13.bin")
+    os.remove(ba+"templates/F2/BinfileName11.bin")
+    os.remove(ba+"templates/F2/BinfileName12.bin")
+    os.remove(ba+"templates/F2/BinfileName13.bin")

@@ -1,6 +1,8 @@
 #-,bullet dots of list, 's or 't
-def TxtToBin(n):
-    lo='templates/UploadF/'+n
+import os
+def TxtToBin(n):    
+    ba=os.getcwd()
+    lo=ba+'templates/UploadF/'+n
     with open(lo,'r') as txtfile:
         mytextstring = txtfile.read()
 

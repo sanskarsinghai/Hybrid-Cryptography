@@ -1,9 +1,10 @@
 from stegano import lsb
+import os
 
 def stegnoimg(use,imn):   
     print("Stegnographic process is in progress..............")
-    
-    ilo="templates/UploadFdec/"+imn+".png"
+    ba=os.getcwd()
+    ilo=ba+"templates/UploadFdec/"+imn+".png"
 
     clear_message = lsb.reveal(ilo)
     s=clear_message.split(' ')
@@ -36,13 +37,13 @@ def stegnoimg(use,imn):
 def DiviIn3(l,n):
     file_number = 0
     print(n)
-    
-    lo='templates/uploadFDec/'+n+'.bin'
+    ba=os.getcwd()
+    lo=ba+'templates/uploadFDec/'+n+'.bin'
 
     with open(lo,'rb') as f:
         while file_number<3:
             s=l[file_number]
             chunk = f.read(s)
-            with open(('templates/F2/BinfileName1' + str(file_number+1)+ '.bin'),'wb') as chunk_file:
+            with open((ba+'templates/F2/BinfileName1' + str(file_number+1)+ '.bin'),'wb') as chunk_file:
                 chunk_file.write(chunk)
             file_number += 1
