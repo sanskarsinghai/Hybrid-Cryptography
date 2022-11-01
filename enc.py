@@ -1,5 +1,4 @@
 from telnetlib import PRAGMA_HEARTBEAT
-from turtle import pen
 import pyaes, secrets
 from des import DesKey
 from arc4 import ARC4

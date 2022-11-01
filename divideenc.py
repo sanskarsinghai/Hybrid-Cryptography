@@ -1,5 +1,4 @@
 from stegano import lsb
-import os
 
 def stegnoimg(use,imn):   
     print("Stegnographic process is in progress..............")
