@@ -737,7 +737,7 @@ def contactus():
 
 @app.route("/requestsresponse")
 def RequestsResponse():
-    if 'un' in session:
+    if 'email' in session:
         allfeed=contact.query.filter(contact.request_id.startswith(session['phone']),(contact.response_status.startswith("Approved"))).order_by(contact.request_id.desc()).all()
         noa=contact.query.filter(contact.response_status.startswith("You") | contact.response_status.startswith("Invalid")).order_by(contact.request_id.desc()).all()
         return render_template("home/RequestResponse.html",allfeed=allfeed,noa=noa)
@@ -747,7 +747,7 @@ def RequestsResponse():
 @app.route("/regeneratekey/<string:file_id>")
 def regeneratekey(file_id):
     # if em !="" and pa !="":   
-    if 'un' in session:
+    if 'email' in session:
         c=contact.query.filter_by(file_id=file_id).first()
         if c is None:
             flash("You may already download the file","warning")
@@ -813,7 +813,7 @@ def regeneratekey(file_id):
 @app.route("/deleteresponse/<string:file_id>")
 def deleteresponse(file_id):
     # if em !="" and pa !="":   
-    if 'un' in session:
+    if 'email' in session:
         c=contact.query.filter_by(file_id=file_id).first()
 
         f=documentT.query.filter_by(Uniqueid=file_id).first()
