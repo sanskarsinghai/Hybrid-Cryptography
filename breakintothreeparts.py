@@ -1,6 +1,7 @@
 import os
 
 def BreakIn3Parts():
+    print("BreakIn3Parts Started")
     ba=os.getcwd()
     file_stat = os.stat(ba+'/templates/F2/BinfileName1.bin')
     a = file_stat.st_size+1
@@ -25,3 +26,4 @@ def BreakIn3Parts():
             file_number += 1
             
     os.remove(ba+"/templates/F2/BinfileName1.bin")
+    print("BreakIn3Parts Completed")

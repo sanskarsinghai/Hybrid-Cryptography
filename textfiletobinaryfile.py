@@ -1,6 +1,7 @@
 #-,bullet dots of list, 's or 't
 import os
 def TxtToBin(n):    
+    print("TxtToBin Started")
     ba=os.getcwd()
     lo=ba+'/templates/UploadF/'+n
     with open(lo,'r') as txtfile:
@@ -12,3 +13,4 @@ def TxtToBin(n):
 
     with open(ba+'/templates\F2\BinfileName1.bin', 'w') as binfile:
         binfile.write(binarray)
+    print("TxtToBin Completed")
