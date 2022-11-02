@@ -16,7 +16,7 @@ def stegnoimg(use,ilo):
     global t,iv,di,lu,o
     ba=os.getcwd()
 
-    ilo=ba+"/templates/UploadFdec/"+ilo+".png"
+    ilo=ba+"/templates/uploadFdec/"+ilo+".png"
 
     print("Stegnographic process is in progress..............")
     
