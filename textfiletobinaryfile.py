@@ -11,6 +11,6 @@ def TxtToBin(n):
 
     binarray = ' '.join(format(ch, 'b') for ch in bytearray(mytextstring))
 
-    with open(ba+'/templates\F2\BinfileName1.bin', 'w') as binfile:
+    with open(ba+'/templates/F2/BinfileName1.bin', 'w') as binfile:
         binfile.write(binarray)
     print("TxtToBin Completed")
