@@ -521,7 +521,7 @@ def decryption():
 
             ba=os.getcwd()
 
-            loc=ba+"/templates/UploadFDec/"
+            loc=ba+"/templates/uploadFDec/"
         
             file.save(os.path.join(loc, ed))
             file2.save(os.path.join(loc,ei))
