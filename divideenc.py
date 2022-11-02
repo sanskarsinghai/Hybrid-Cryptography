@@ -4,7 +4,7 @@ import os
 def stegnoimg(use,imn):   
     print("Stegnographic process is in progress..............")
     ba=os.getcwd()
-    ilo=ba+"/templates/uploadFdec/"+imn+".png"
+    ilo=ba+"/templates/uploadFDec/"+imn+".png"
 
     clear_message = lsb.reveal(ilo)
     s=clear_message.split(' ')
