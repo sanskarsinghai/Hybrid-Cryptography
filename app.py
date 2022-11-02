@@ -25,9 +25,12 @@ from datetime import datetime
 import pytz
 import math
 
-#fro key regeneration
+#for key regeneration
 from arc4 import ARC4
 from stegano import lsb
+
+#for strong password
+import re
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'super secret key'
@@ -71,7 +74,6 @@ class contact(db.Model):
     request_id = db.Column(db.String(150),nullable=False)
     Key_Regeneration_Token = db.Column(db.String(150),nullable=False)
     response_status=db.Column(db.String(150),nullable=False)
-
 
 @app.route("/admin/login",methods=["GET","POST"])
 def adminlogin():
@@ -146,6 +148,7 @@ def status(email):
 def keys():
     if 'un' in session:
         allfeed=documentT.query.filter_by().order_by(documentT.Uniqueid.desc()).all()
+        allfeed.reverse()
         return render_template("admin/keymanagement.html",allfeed=allfeed)
     else:
         return redirect("/admin/")
@@ -154,6 +157,7 @@ def keys():
 def usersRequests():
     if 'un' in session:
         allfeed=contact.query.filter_by(response_status="Under Process").order_by(contact.request_id.desc()).all()
+        allfeed.reverse()
         return render_template("admin/RequestKey.html",allfeed=allfeed)
     else:
         return redirect("/admin/login")
@@ -224,6 +228,26 @@ def login():
             
     return render_template("accounts/login.html",msg=msg)
 
+
+def strongpassword(p):
+    while True:  
+        if (len(p)<9):
+            break
+        elif not re.search("[a-z]",p):
+            break
+        elif not re.search("[0-9]",p):
+            break
+        elif not re.search("[A-Z]",p):
+            break
+        elif not re.search("[$#@]",p):
+            break
+        elif re.search("\s",p):
+            break
+        else:
+            return True
+
+    return False
+
 @app.route("/signup",methods=["GET","POST"])
 def signup():
     msg=""
@@ -247,6 +271,9 @@ def signup():
             msg="Email or Phone number already register"
         elif password!=conpassword:
             msg="Password and Confirm password are not matched"
+
+        elif not strongpassword(password):
+            msg="Password is too Weak"
 
         elif len(phone)!=10:
             msg="Invalid phone number"
@@ -334,6 +361,11 @@ def passwordupdate():
                     elif npass!=copass:
                         flash("New and Confirm password does not matched","warning")
                         return redirect("/passwrodupdatepage")
+                    
+                    elif not strongpassword(npass):
+                        flash("Password is too Weak","warning")
+                        return redirect("/passwrodupdatepage")
+
                     n=hashlib.md5(npass.encode())
             
                     re.password=n.hexdigest()            
@@ -623,7 +655,8 @@ def about():
 @app.route("/logdetails")
 def logdetails():
     if 'email' in session:
-        c = LogT.query.filter(LogT.file_id.startswith(str(session['phone'])) | LogT.user_no.startswith(str(session['phone']))).order_by(LogT.date_time.desc()).all()
+        c = LogT.query.filter(LogT.file_id.startswith(str(session['phone'])) | LogT.user_no.startswith(str(session['phone']))).all()
+        c.reverse()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -638,12 +671,12 @@ def logdetails():
         elif page==1:
             prev = "#"
             next = "/logdetails?page="+ str(page+1)
-            flash("Your are on latest logs","info")
+            flash("Your are on oldest logs","info")
             
         elif page==last:
             prev = "/logdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on oldest logs","info")
+            flash("Your are on latest logs","info")
         else:
             prev = "/logdetails?page="+ str(page-1)
             next = "/logdetails?page="+ str(page+1)
@@ -655,7 +688,8 @@ def logdetails():
 @app.route("/docdetails")
 def docdetails():
     if 'email' in session:
-        c = documentT.query.filter(documentT.Uniqueid.startswith(str(session['phone']))).order_by(documentT.Uniqueid.desc()).all()
+        c = documentT.query.filter(documentT.Uniqueid.startswith(str(session['phone']))).all()
+        c.reverse()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -670,12 +704,12 @@ def docdetails():
         elif page==1:
             prev = "#"
             next = "/docdetails?page="+ str(page+1)
-            flash("Your are on latest docs","info")
+            flash("Your are on oldest docs","info")
             
         elif page==last:
             prev = "/docdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on oldest docs","info")
+            flash("Your are on latest docs","info")
         else:
             prev = "/docdetails?page="+ str(page-1)
             next = "/docdetails?page="+ str(page+1)
@@ -687,7 +721,8 @@ def docdetails():
 @app.route("/decdocdetails")
 def decdocdetails():
     if 'email' in session:
-        c = documentT.query.filter(documentT.recepientid.startswith('%'+str(session['phone'])+'%') ).order_by(documentT.Uniqueid.desc()).all()
+        c = documentT.query.filter(documentT.recepientid.startswith('%'+str(session['phone'])+'%') ).all()
+        c.reverse()
         last = math.ceil(len(c)/3)
         page = request.args.get('page')
         if (not str(page).isnumeric()):
@@ -702,12 +737,12 @@ def decdocdetails():
         elif page==1:
             prev = "#"
             next = "/docdetails?page="+ str(page+1)
-            flash("Your are on latest docs","info")
+            flash("Your are on oldest docs","info")
             
         elif page==last:
             prev = "/docdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on oldest docs","info")
+            flash("Your are on latest docs","info")
         else:
             prev = "/docdetails?page="+ str(page-1)
             next = "/docdetails?page="+ str(page+1)
@@ -742,8 +777,10 @@ def contactus():
 @app.route("/requestsresponse")
 def RequestsResponse():
     if 'email' in session:
-        allfeed=contact.query.filter(contact.request_id.startswith(session['phone']),(contact.response_status.startswith("Approved"))).order_by(contact.request_id.desc()).all()
-        noa=contact.query.filter(contact.response_status.startswith("You") | contact.response_status.startswith("Invalid")).order_by(contact.request_id.desc()).all()
+        allfeed=contact.query.filter(contact.request_id.startswith(session['phone']),(contact.response_status.startswith("Approved"))).all()
+        allfeed.reverse()
+        noa=contact.query.filter(contact.response_status.startswith("You") | contact.response_status.startswith("Invalid")).all()
+        noa.reverse()
         return render_template("home/RequestResponse.html",allfeed=allfeed,noa=noa)
     else:
         return redirect("/login")
