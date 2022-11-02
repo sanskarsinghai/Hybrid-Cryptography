@@ -22,6 +22,7 @@ from zipfile import ZipFile
 
 #for data in logs
 from datetime import datetime
+import pytz
 import math
 
 #fro key regeneration
@@ -432,8 +433,10 @@ def encryption():
             r=enc.rc4enc()
             le=enc.decauth(lo.phone,dnu)
             
-            d=datetime.today()
-            s=d.strftime("%d-%m-%Y %I-%M-%S %p")
+            ist = pytz.timezone('Asia/Kolkata')
+            a=datetime.now(ist)  
+            s=a.strftime("%d-%m-%Y %I-%M-%S %p") 
+
 
             r=enc.stegnoimg(k[0],iv,di,r,le,imna,s)
 
@@ -576,8 +579,9 @@ def decryption():
                 flash("Invalid key for decryption","warning")
                 return redirect(request.url)
 
-            d=datetime.today()
-            s=d.strftime("%d-%m-%Y %I-%M-%S %p")
+            ist = pytz.timezone('Asia/Kolkata')
+            a=datetime.now(ist)  
+            s=a.strftime("%d-%m-%Y %I-%M-%S %p") 
 
             m.MergeIn3(s)
 
@@ -785,8 +789,9 @@ def regeneratekey(file_id):
         loc=ba+"/templates/KeyRegC/"+im+".png"
         secret.save(loc)
 
-        d=datetime.today()
-        s=d.strftime("%d-%m-%Y %I-%M-%S %p")
+        ist = pytz.timezone('Asia/Kolkata')
+        a=datetime.now(ist)  
+        s=a.strftime("%d-%m-%Y %I-%M-%S %p") 
 
         lui=s+"_"+f.Uniqueid
         loD=LogT(ObjectId=lui,file_id=f.Uniqueid,file_name=f.doc_name,operation="Key Regeneration",date_time=s,owner_no=f.ownerid,user_no=session['phone'])
@@ -818,8 +823,9 @@ def deleteresponse(file_id):
 
         f=documentT.query.filter_by(Uniqueid=file_id).first()
         
-        d=datetime.today()
-        s=d.strftime("%d-%m-%Y %I-%M-%S %p")
+        ist = pytz.timezone('Asia/Kolkata')
+        a=datetime.now(ist)  
+        s=a.strftime("%d-%m-%Y %I-%M-%S %p") 
 
         lui=s+"_"+c.file_id
         loD=LogT(ObjectId=lui,file_id=c.file_id,file_name="None",operation=c.response_status,date_time=s,owner_no="None",user_no=session['phone'])
