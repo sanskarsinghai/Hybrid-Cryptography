@@ -671,12 +671,12 @@ def logdetails():
         elif page==1:
             prev = "#"
             next = "/logdetails?page="+ str(page+1)
-            flash("Your are on oldest logs","info")
+            flash("Your are on latest logs","info")
             
         elif page==last:
             prev = "/logdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on latest logs","info")
+            flash("Your are on oldest logs","info")
         else:
             prev = "/logdetails?page="+ str(page-1)
             next = "/logdetails?page="+ str(page+1)
@@ -704,12 +704,12 @@ def docdetails():
         elif page==1:
             prev = "#"
             next = "/docdetails?page="+ str(page+1)
-            flash("Your are on oldest docs","info")
+            flash("Your are on latest docs","info")
             
         elif page==last:
             prev = "/docdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on latest docs","info")
+            flash("Your are on oldest docs","info")
         else:
             prev = "/docdetails?page="+ str(page-1)
             next = "/docdetails?page="+ str(page+1)
@@ -737,12 +737,12 @@ def decdocdetails():
         elif page==1:
             prev = "#"
             next = "/docdetails?page="+ str(page+1)
-            flash("Your are on oldest docs","info")
+            flash("Your are on latest docs","info")
             
         elif page==last:
             prev = "/docdetails?page="+ str(page-1)
             next = "#"
-            flash("Your are on latest docs","info")
+            flash("Your are on oldest docs","info")
         else:
             prev = "/docdetails?page="+ str(page-1)
             next = "/docdetails?page="+ str(page+1)
