@@ -529,7 +529,7 @@ def decryption():
 
     if 'email' in session:
         if request.method=="POST":
-
+         try:
             if 'edoc' not in request.files:
                 flash("No file attached in request","warning")
                 return redirect(request.url)
@@ -639,6 +639,9 @@ def decryption():
             os.remove("templates/decFile/"+s+".txt")
 
             return send_file(stream,as_attachment=True,attachment_filename=s+' DecrytpionDocs.zip')
+         except Exception as e:
+            flash("Please upload the correct data","Warning")
+            return redirect(request.url)
 
         return render_template("home/decryption.html")
     else:
