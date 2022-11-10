@@ -1,4 +1,4 @@
-﻿﻿absl-py==1.2.0
+﻿absl-py==1.2.0
 alembic==1.8.1
 aniso8601==9.0.1
 anyio==3.6.1
@@ -59,7 +59,6 @@ google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
 greenlet==1.1.2
 grpcio==1.48.1
-gunicorn==20.1.0
 h5py==3.7.0
 
 htmlmin==0.1.12
@@ -75,7 +74,15 @@ joblib==1.1.0
 jsmin==3.0.1
 json5==0.9.10
 jsonschema==4.14.0
-
+jupyter==1.0.0
+jupyter-client==7.3.4
+jupyter-console==6.4.4
+jupyter-core==4.11.1
+jupyter-server==1.18.1
+jupyterlab==3.4.5
+jupyterlab-pygments==0.2.2
+jupyterlab-server==2.15.0
+jupyterlab-widgets==3.0.3
 
 keyboard==0.13.5
 kiwisolver==1.4.2
@@ -96,7 +103,7 @@ nbformat==5.4.0
 nest-asyncio==1.5.5
 notebook==6.4.12
 notebook-shim==0.1.0
-
+numpy==1.21.4
 oauthlib==3.2.1
 
 opt-einsum==3.3.0
@@ -147,7 +154,7 @@ Send2Trash==1.8.0
 shellescape==3.8.1
 simplegeneric==0.8.1
 six==1.12.0
-
+sklearn==0.0
 sniffio==1.2.0
 soupsieve==2.3.2.post1
 SQLAlchemy==1.4.29
