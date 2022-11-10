@@ -171,15 +171,15 @@ def responserequest(file_id):
         f=documentT.query.filter_by(Uniqueid=file_id).first()
 
         if f is None:
-            flash("Invalid file id","success")
+            flash("Invalid file id","warning")
             c.response_status="Invalid file id"
 
         elif f.ownerid!=c.request_id:
-            flash("You are not authorized to get key","success")
+            flash("You are not authorized to get key","warning")
             c.response_status="You are not authorized to get key"
 
         elif f.Key_Regeneration_Token!=c.Key_Regeneration_Token:
-            flash("Invalid Key Regeneration Token","success")
+            flash("Invalid Key Regeneration Token","warning")
             c.response_status="Invalid Key Regeneration Token"
         
         else:
