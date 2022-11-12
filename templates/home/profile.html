@@ -75,7 +75,19 @@
                             <form action="/passwordupdate" method="post">
                             <!--<div class="d-flex justify-content-between align-items-center experience"><span>Change Password</span></div><br> -->
                             <div class="col-md-12"><label for="password" class="labels">Current Password</label><input type="password" class="form-control" id="password" name="cpassword"  placeholder="Current Password" value=""></div> <br>
-                            <div class="col-md-12"><label for="password" class="labels">New Password</label><input type="password" class="form-control" id="password" name="npassword" placeholder="Enter New password" value=""></div><br>
+                            <div class="col-md-12"><label for="password" class="labels">New Password</label><input type="password" class="form-control" id="password" name="npassword" placeholder="Enter New password" value="">
+                                <br>
+                                <ul>
+                                    <li>Password Should be atleast of 10 digits</li>
+                                    <li>It Should contain atleast: -</li>
+                                    <ul>
+                                    <li>One captial letter</li>
+                                    <li>One small letter</li>
+                                    <li>One special symbol</li>
+                                    <li>One numerical value</li>
+                                </ul>
+                                  </ul>
+                            </div>
                             <div class="col-md-12"><label for="password" class="labels">Confirm Password</label><input type="password" class="form-control" id="password" name="copassword" placeholder="Re-enter New Pasword" value=""></div>
                             <div class="mt-5 text-center"><button type="submit" class="btn btn-primary">Change Password</button></div>
                              
