@@ -265,18 +265,33 @@ def signup():
         password=request.form['password']
         conpassword=request.form['conpassword']
 
+        ist = pytz.timezone('Asia/Kolkata')
+        a=datetime.now(ist)  
+        sa=a.strftime("%Y")
+        s=int(sa)-18
+        pa=int(sa)-90
+        
         e=registration.query.filter_by(email=email).first()
         p=registration.query.filter_by(phone=phone).first()
-        if e is not None or p is not None :
-            msg="Email or Phone number already register"
+        
+        if e is not None:
+            msg="Email already register"
+        
+        elif p is not None :
+            msg="Phone number already register"
+
+        elif len(phone)!=10:
+            msg="Invalid phone number"
+        
+        elif int(dob[6:])>s or int(dob[6:])<pa:
+            msg="Invalid date of birth"
+
+            
         elif password!=conpassword:
             msg="Password and Confirm password are not matched"
 
         elif not strongpassword(password):
             msg="Password is too Weak"
-
-        elif len(phone)!=10:
-            msg="Invalid phone number"
 
         else:
             p = hashlib.md5(password.encode())
@@ -285,8 +300,11 @@ def signup():
             db.session.commit()
             flash(fname+"  register Successfully","success")
             return redirect("/login")
-        
-    return render_template("accounts/register.html",msg=msg)
+    if msg=="":
+      return render_template("accounts/register.html",msg=msg)
+    else:
+      return render_template("accounts/register.html",msg=msg,m=request.form)
+
 
 @app.route("/logout")
 def logout():

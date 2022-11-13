@@ -29,6 +29,40 @@
                                         Add your credentials
                                     {% endif %}                                  
                                 </span>
+                                
+                                <span class="font-weight-normal">
+                                    {% if m %}
+                                        {% set f=m['fname']%}
+                                        {% set l=m['lname']%}
+                                        {% set p=m['phone']%}
+                                        {% set d=m['dob']%}
+
+                                        {% if m['gender']=='male' %}
+                  
+                                        {% set male='checked'%}
+                                        {% set female=''%}
+                                  
+                                        {% else %}
+                                  
+                                        {% set female='checked'%}
+                                        {% set male=''%}
+                                  
+                                        {% endif %}
+                                  
+                                        {% set e=m['email']%}
+                                    {% else %}
+                                    
+                                    {% set f=''%}
+                                    {% set l=''%}
+                                    {% set p=''%}
+                                    {% set d=''%}
+                                    {% set male=''%}
+                                    {% set female=''%}          
+                                    {% set e=''%}
+
+                                    {% endif %}                                  
+                                </span>
+                                
                             </div>
 
                             {% if not success %}
@@ -41,7 +75,7 @@
                                         <label for="fname">Firstname</label>
                                         <div class="input-group">
                                             
-                                            <input type="text" class="form-control" id="inputEmail3" name="fname" placeholder="First name" required>
+                                            <input type="text" class="form-control" id="inputEmail3" name="fname" placeholder="First name" value="{{f}}" required>
                                         </div>  
                                     </div>
                                     <!-- Form -->
@@ -49,7 +83,7 @@
                                         <label for="lname">Lastname</label>
                                         <div class="input-group">
                                             
-                                            <input type="text" class="form-control" id="inputEmail3" name="lname" placeholder="Last name" required>
+                                            <input type="text" class="form-control" id="inputEmail3" name="lname" placeholder="Last name" value="{{l}}" required>
                                         </div>  
                                     </div>
 
@@ -57,7 +91,7 @@
                                         <label for="phone">Phone</label>
                                         <div class="input-group">
                                            
-                                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter your number" required>
+                                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter your number" value="{{p}}" required>
                                         </div>  
                                     </div>
                                     
@@ -66,21 +100,20 @@
                                         <div class="input-group mb-4">
                                             <span class="input-group-text" id="basic-addonDate1"><span
                                                     class="fas far fa-calendar-alt"></span></span>
-                                            <input class="form-control" data-datepicker="" id="exampleInputDate1" name="dob" placeholder="Select date"
-                                                type="text" aria-label="Date with icon left">
+                                            <input class="form-control" data-datepicker="" id="exampleInputDate1" name="dob" placeholder="Select date" type="text" aria-label="Date with icon left" value="{{d}}" required>
                                         </div>                                
                                     </div>
 
                                     <fieldset>
                                         <legend class="h6">Gender</legend>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="male" checked>
+                                            <input class="form-check-input" type="radio" name="gender" id="exampleRadios1" value="male" {{male}} checked>
                                             <label class="form-check-label" for="exampleRadios1">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="female">
+                                            <input class="form-check-input" type="radio" name="gender" id="exampleRadios2" value="female" {{female}}>
                                             <label class="form-check-label" for="exampleRadios2">
                                                 Female
                                             </label>
@@ -94,7 +127,7 @@
                                         <div class="input-group">
                                         
                                             
-                                            <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" required>
+                                            <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" value="{{e}}" required>
                                         </div>  
                                     </div>
                                     <!-- End of Form -->
@@ -119,7 +152,7 @@
 
                                         <div class="form-group">
                                             <!-- Form -->
-                                            <label>Password Check</label>
+                                            <label>Confirm Password</label>
                                             <div class="mb-3">
                                             <input type="password" class="form-control" id="inputEmail3" name="conpassword" placeholder="Confirm password" required>
                                              </div>
